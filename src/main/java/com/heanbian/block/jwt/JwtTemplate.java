@@ -20,9 +20,15 @@ public class JwtTemplate {
 	private PublicKey publicKey;
 
 	public JwtTemplate() {
-		KeyPair keyPair = getKeyPair();
-		this.privateKey = keyPair.getPrivate();
-		this.publicKey = keyPair.getPublic();
+		KeyPair kp = getKeyPair();
+		this.privateKey = kp.getPrivate();
+		this.publicKey = kp.getPublic();
+	}
+
+	public JwtTemplate(KeyPair keyPair) {
+		KeyPair kp = requireNonNull(keyPair, "keyPair must not be null");
+		this.privateKey = kp.getPrivate();
+		this.publicKey = kp.getPublic();
 	}
 
 	public JwtTemplate(PrivateKey privateKey, PublicKey publicKey) {
@@ -51,7 +57,7 @@ public class JwtTemplate {
 		try {
 			return Jwts.parser().setSigningKey(publicKey).parseClaimsJws(token).getBody();
 		} catch (Exception e) {
-			return null;
+			throw new RuntimeException(e);
 		}
 	}
 
