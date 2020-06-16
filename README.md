@@ -12,7 +12,7 @@ JDK11+
 <dependency>
 	<groupId>com.heanbian</groupId>
 	<artifactId>heanbian-jwt</artifactId>
-	<version>11.2.1</version>
+	<version>11.0.0</version>
 </dependency>
 ```
 
