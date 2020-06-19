@@ -11,7 +11,7 @@
 
 	<name>heanbian-jwt</name>
 	<url>https://github.com/heanbian/heanbian-jwt</url>
-	<description>Heanbian jwt components.</description>
+	<description>Heanbian jwt component.</description>
 	<inceptionYear>2020</inceptionYear>
 
 	<licenses>
