@@ -6,13 +6,18 @@
 
 	<groupId>com.heanbian</groupId>
 	<artifactId>heanbian-jwt</artifactId>
-	<version>11.0.1</version>
+	<version>11.0.2</version>
 	<packaging>jar</packaging>
 
 	<name>heanbian-jwt</name>
 	<url>https://github.com/heanbian/heanbian-jwt</url>
 	<description>Heanbian jwt component.</description>
 	<inceptionYear>2020</inceptionYear>
+
+	<organization>
+		<name>Heanbian</name>
+		<url>https://heanbian.com</url>
+	</organization>
 
 	<licenses>
 		<license>

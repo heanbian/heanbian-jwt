@@ -1,7 +1,6 @@
 package com.heanbian.block.jwt;
 
 import static com.heanbian.block.crypto.RsaTemplate.getKeyPair;
-import static java.util.Objects.requireNonNull;
 
 import java.security.KeyPair;
 import java.security.PrivateKey;
@@ -20,20 +19,16 @@ public class JwtTemplate {
 	private PublicKey publicKey;
 
 	public JwtTemplate() {
-		KeyPair kp = getKeyPair();
-		this.privateKey = kp.getPrivate();
-		this.publicKey = kp.getPublic();
+		this(getKeyPair());
 	}
 
 	public JwtTemplate(KeyPair keyPair) {
-		KeyPair kp = requireNonNull(keyPair, "keyPair must not be null");
-		this.privateKey = kp.getPrivate();
-		this.publicKey = kp.getPublic();
+		this(keyPair.getPrivate(), keyPair.getPublic());
 	}
 
 	public JwtTemplate(PrivateKey privateKey, PublicKey publicKey) {
-		this.privateKey = requireNonNull(privateKey, "privateKey must not be null");
-		this.publicKey = requireNonNull(publicKey, "publicKey must not be null");
+		this.privateKey = privateKey;
+		this.publicKey = publicKey;
 	}
 
 	public String generateToken(Map<String, Object> claims) {
