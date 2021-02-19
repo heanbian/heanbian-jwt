@@ -58,10 +58,10 @@ public class JwtTemplate {
 	}
 
 	public boolean verify(String token) {
-		return verify(token, this.publicKey);
+		return check(token, this.publicKey);
 	}
 
-	public boolean verify(String token, PublicKey publicKey) {
+	public boolean check(String token, PublicKey publicKey) {
 		try {
 			Claims claims = getClaimsFromToken(token, publicKey);
 			Date exp = claims.getExpiration();
