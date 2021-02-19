@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -41,7 +42,7 @@ public class JwtTemplate {
 
 	public String generateToken(Map<String, Object> claims, PrivateKey privateKey, Date exp) {
 		return Jwts.builder().setId(UUID.randomUUID().toString()).setIssuedAt(new Date()).setClaims(claims)
-				.setExpiration(exp).signWith(SignatureAlgorithm.PS512, privateKey).compact();
+				.setExpiration(exp).signWith(privateKey, SignatureAlgorithm.PS512).compact();
 	}
 
 	public Claims getClaimsFromToken(String token) {
@@ -50,8 +51,8 @@ public class JwtTemplate {
 
 	public Claims getClaimsFromToken(String token, PublicKey publicKey) {
 		try {
-			return Jwts.parser().setSigningKey(publicKey).parseClaimsJws(token).getBody();
-		} catch (Exception e) {
+			return Jwts.parserBuilder().setSigningKey(publicKey).build().parseClaimsJws(token).getBody();
+		} catch (JwtException e) {
 			throw new RuntimeException(e);
 		}
 	}
