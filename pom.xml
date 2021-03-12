@@ -6,7 +6,7 @@
 
 	<groupId>com.heanbian.block</groupId>
 	<artifactId>heanbian-jwt</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<packaging>jar</packaging>
 
 	<name>heanbian-jwt</name>
@@ -164,16 +164,16 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<nimbus-jose-jwt.version>9.7</nimbus-jose-jwt.version>
 		<jjwt.version>0.11.2</jjwt.version>
-		<heanbian-crypto.version>1.0.1</heanbian-crypto.version>
 		<arguments />
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.heanbian.block</groupId>
-			<artifactId>heanbian-crypto</artifactId>
-			<version>${heanbian-crypto.version}</version>
+			<groupId>com.nimbusds</groupId>
+			<artifactId>nimbus-jose-jwt</artifactId>
+			<version>${nimbus-jose-jwt.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>

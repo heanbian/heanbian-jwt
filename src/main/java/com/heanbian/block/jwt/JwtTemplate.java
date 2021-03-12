@@ -1,14 +1,12 @@
 package com.heanbian.block.jwt;
 
-import static com.heanbian.block.crypto.RsaTemplate.getKeyPair;
-
 import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
-
+import com.heanbian.block.jwt.jose.KeyGeneratorUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -20,50 +18,31 @@ public class JwtTemplate {
 	private PublicKey publicKey;
 
 	public JwtTemplate() {
-		this(getKeyPair());
-	}
-
-	public JwtTemplate(KeyPair keyPair) {
-		this(keyPair.getPrivate(), keyPair.getPublic());
-	}
-
-	public JwtTemplate(PrivateKey privateKey, PublicKey publicKey) {
-		this.privateKey = privateKey;
-		this.publicKey = publicKey;
+		KeyPair keyPair = KeyGeneratorUtils.generateEcKey();
+		this.publicKey = keyPair.getPublic();
+		this.privateKey = keyPair.getPrivate();
 	}
 
 	public String generateToken(Map<String, Object> claims) {
-		return generateToken(claims, this.privateKey, new Date(System.currentTimeMillis() + 1800000));
+		return generateToken(claims, new Date(System.currentTimeMillis() + 1800000));
 	}
 
 	public String generateToken(Map<String, Object> claims, Date exp) {
-		return generateToken(claims, this.privateKey, exp);
-	}
-
-	public String generateToken(Map<String, Object> claims, PrivateKey privateKey, Date exp) {
 		return Jwts.builder().setId(UUID.randomUUID().toString()).setIssuedAt(new Date()).setClaims(claims)
-				.setExpiration(exp).signWith(privateKey, SignatureAlgorithm.ES512).compact();
+				.setExpiration(exp).signWith(this.privateKey, SignatureAlgorithm.ES256).compact();
 	}
 
 	public Claims getClaimsFromToken(String token) {
-		return getClaimsFromToken(token, this.publicKey);
-	}
-
-	public Claims getClaimsFromToken(String token, PublicKey publicKey) {
 		try {
-			return Jwts.parserBuilder().setSigningKey(publicKey).build().parseClaimsJws(token).getBody();
+			return Jwts.parserBuilder().setSigningKey(this.publicKey).build().parseClaimsJws(token).getBody();
 		} catch (JwtException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public boolean verify(String token) {
-		return check(token, this.publicKey);
-	}
-
-	public boolean check(String token, PublicKey publicKey) {
+	public boolean check(String token) {
 		try {
-			Claims claims = getClaimsFromToken(token, publicKey);
+			Claims claims = getClaimsFromToken(token);
 			Date exp = claims.getExpiration();
 			return exp.after(new Date());
 		} catch (Exception e) {
