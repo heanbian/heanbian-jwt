@@ -42,7 +42,7 @@ public class JwtTemplate {
 
 	public String generateToken(Map<String, Object> claims, PrivateKey privateKey, Date exp) {
 		return Jwts.builder().setId(UUID.randomUUID().toString()).setIssuedAt(new Date()).setClaims(claims)
-				.setExpiration(exp).signWith(privateKey, SignatureAlgorithm.PS512).compact();
+				.setExpiration(exp).signWith(privateKey, SignatureAlgorithm.ES512).compact();
 	}
 
 	public Claims getClaimsFromToken(String token) {
