@@ -6,7 +6,9 @@ import java.security.PublicKey;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
-import com.heanbian.block.jwt.jose.KeyGeneratorUtils;
+
+import com.heanbian.block.crypto.EcTemplate;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -18,7 +20,8 @@ public class JwtTemplate {
 	private PublicKey publicKey;
 
 	public JwtTemplate() {
-		KeyPair keyPair = KeyGeneratorUtils.generateEcKey();
+		EcTemplate ec = new EcTemplate();
+		KeyPair keyPair = ec.getKeyPair();
 		this.publicKey = keyPair.getPublic();
 		this.privateKey = keyPair.getPrivate();
 	}
@@ -48,14 +51,6 @@ public class JwtTemplate {
 		} catch (Exception e) {
 			return false;
 		}
-	}
-
-	public PrivateKey getPrivateKey() {
-		return privateKey;
-	}
-
-	public PublicKey getPublicKey() {
-		return publicKey;
 	}
 
 }

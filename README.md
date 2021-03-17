@@ -12,23 +12,12 @@ JDK11+
 <dependency>
 	<groupId>com.heanbian.block</groupId>
 	<artifactId>heanbian-jwt</artifactId>
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 </dependency>
 ```
 
 ## 使用示例
 
-```
-import com.heanbian.block.jwt.*;
+> JwtTemplate
 
-public class Test {
-
-	public static void main(String[] args) {
-		JwtTemplate template = new JwtTemplate();
-		
-		...
-	}
-}
-```
-
-说明：支持RSA的JWT生成token解析工具类。
+说明：支持ECC JWT。
