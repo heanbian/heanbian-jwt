@@ -164,7 +164,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<heanbian-crypto.version>1.0.3</heanbian-crypto.version>
+		<heanbian-crypto.version>1.0.5</heanbian-crypto.version>
 		<jjwt.version>0.11.2</jjwt.version>
 		<arguments />
 	</properties>
