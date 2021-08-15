@@ -6,7 +6,7 @@
 
 	<groupId>com.heanbian.block</groupId>
 	<artifactId>heanbian-jwt</artifactId>
-	<version>1.0.6</version>
+	<version>1.0.7</version>
 	<packaging>jar</packaging>
 
 	<name>heanbian-jwt</name>
@@ -165,7 +165,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<heanbian-crypto.version>1.0.5</heanbian-crypto.version>
-		<jjwt.version>0.11.2</jjwt.version>
+		<java-jwt.version>3.18.1</java-jwt.version>
 		<arguments />
 	</properties>
 
@@ -177,21 +177,9 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-api</artifactId>
-			<version>${jjwt.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-impl</artifactId>
-			<version>${jjwt.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-jackson</artifactId>
-			<version>${jjwt.version}</version>
-			<scope>runtime</scope>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>${java-jwt.version}</version>
 		</dependency>
 	</dependencies>
 </project>

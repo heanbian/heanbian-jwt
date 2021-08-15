@@ -3,54 +3,59 @@ package com.heanbian.block.jwt;
 import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.interfaces.ECPrivateKey;
+import java.security.interfaces.ECPublicKey;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.Claim;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.heanbian.block.crypto.EcTemplate;
-
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 public class JwtTemplate {
 
-	private PrivateKey privateKey;
-	private PublicKey publicKey;
+	private final PrivateKey privateKey;
+	private final PublicKey publicKey;
+	private final Algorithm algorithm;
 
 	public JwtTemplate() {
 		EcTemplate ec = new EcTemplate();
 		KeyPair keyPair = ec.getKeyPair();
 		this.publicKey = keyPair.getPublic();
 		this.privateKey = keyPair.getPrivate();
+		this.algorithm = Algorithm.ECDSA256((ECPublicKey) this.publicKey, (ECPrivateKey) this.privateKey);
 	}
 
-	public String generateToken(Map<String, Object> claims) {
-		return generateToken(claims, new Date(System.currentTimeMillis() + 1800000));
+	public String createToken(Map<String, Object> claims) {
+		return JWT.create()//
+				.withIssuer("Party_A") //
+				.withAudience("Party_B") //
+				.withIssuedAt(new Date()) //
+				.withExpiresAt(new Date(System.currentTimeMillis() + 1800000)) //
+				.withPayload(claims)//
+				.withNotBefore(new Date())//
+				.withJWTId(UUID.randomUUID().toString())//
+				.sign(this.algorithm);
 	}
 
-	public String generateToken(Map<String, Object> claims, Date exp) {
-		return Jwts.builder().setId(UUID.randomUUID().toString()).setIssuedAt(new Date()).setClaims(claims)
-				.setExpiration(exp).signWith(this.privateKey, SignatureAlgorithm.ES256).compact();
+	public Map<String, Claim> getClaims(String token) {
+		DecodedJWT jwt = getDecodedJWT(token);
+		return jwt != null ? jwt.getClaims() : null;
 	}
 
-	public Claims getClaimsFromToken(String token) {
+	public DecodedJWT getDecodedJWT(String token) {
 		try {
-			return Jwts.parserBuilder().setSigningKey(this.publicKey).build().parseClaimsJws(token).getBody();
-		} catch (JwtException e) {
-			throw new RuntimeException(e);
+			JWTVerifier verifier = JWT.require(this.algorithm).withIssuer("Party_A").build();
+			return verifier.verify(token);
+		} catch (JWTVerificationException e) {
+			e.printStackTrace();
 		}
-	}
-
-	public boolean check(String token) {
-		try {
-			Claims claims = getClaimsFromToken(token);
-			Date exp = claims.getExpiration();
-			return exp.after(new Date());
-		} catch (Exception e) {
-			return false;
-		}
+		return null;
 	}
 
 }
