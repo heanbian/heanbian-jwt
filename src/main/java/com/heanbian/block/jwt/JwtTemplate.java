@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.Claim;
@@ -31,7 +30,7 @@ public class JwtTemplate {
 		this.algorithm = Algorithm.ECDSA256((ECPublicKey) this.publicKey, (ECPrivateKey) this.privateKey);
 	}
 
-	public String createToken(Map<String, Object> claims) {
+	public String createToken(Map<String, ?> claims) {
 		return JWT.create()//
 				.withIssuer("Party_A") //
 				.withAudience("Party_B") //
@@ -48,10 +47,9 @@ public class JwtTemplate {
 		return jwt != null ? jwt.getClaims() : null;
 	}
 
-	public DecodedJWT getDecodedJWT(String token) {
+	DecodedJWT getDecodedJWT(String token) {
 		try {
-			JWTVerifier verifier = JWT.require(this.algorithm).withIssuer("Party_A").build();
-			return verifier.verify(token);
+			return JWT.require(this.algorithm).withIssuer("Party_A").build().verify(token);
 		} catch (JWTVerificationException e) {
 			e.printStackTrace();
 		}
