@@ -32,8 +32,6 @@ public class JwtTemplate {
 
 	public String createToken(Map<String, ?> claims) {
 		return JWT.create()//
-				.withIssuer("A") //
-				.withAudience("B") //
 				.withIssuedAt(new Date()) //
 				.withExpiresAt(new Date(System.currentTimeMillis() + 1800000)) //
 				.withPayload(claims)//
@@ -47,11 +45,10 @@ public class JwtTemplate {
 		return jwt != null ? jwt.getClaims() : null;
 	}
 
-	DecodedJWT getDecodedJWT(String token) {
+	private DecodedJWT getDecodedJWT(String token) {
 		try {
-			return JWT.require(this.algorithm).withIssuer("A").build().verify(token);
+			return JWT.require(this.algorithm).build().verify(token);
 		} catch (JWTVerificationException e) {
-			e.printStackTrace();
 		}
 		return null;
 	}

@@ -6,7 +6,7 @@
 
 	<groupId>com.heanbian</groupId>
 	<artifactId>heanbian-jwt</artifactId>
-	<version>13.1</version>
+	<version>13.2</version>
 	<packaging>jar</packaging>
 
 	<name>heanbian-jwt</name>
@@ -164,7 +164,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<heanbian-crypto.version>13.1</heanbian-crypto.version>
+		<heanbian-crypto.version>13.2</heanbian-crypto.version>
 		<java-jwt.version>4.2.2</java-jwt.version>
 	</properties>
 
