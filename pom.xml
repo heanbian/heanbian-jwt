@@ -120,7 +120,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>3.2.1</version>
+				<version>3.3.0</version>
 			</plugin>
 		</plugins>
 		<pluginManagement>
@@ -153,7 +153,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<heanbian-crypto.version>13.4</heanbian-crypto.version>
-		<java-jwt.version>4.3.0</java-jwt.version>
+		<java-jwt.version>4.4.0</java-jwt.version>
 	</properties>
 	<dependencies>
 		<dependency>
