@@ -12,7 +12,7 @@ JDK 17
 <dependency>
   <groupId>com.heanbian</groupId>
   <artifactId>heanbian-jwt</artifactId>
-  <version>14.1</version>
+  <version>15.0</version>
 </dependency>
 ```
 
@@ -20,4 +20,4 @@ JDK 17
 
 > JwtTemplate
 
-说明：支持ECC JWT。
+说明：支持 ECC JWT
