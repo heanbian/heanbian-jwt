@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.heanbian</groupId>
 	<artifactId>heanbian-jwt</artifactId>
-	<version>15.0</version>
+	<version>16.1</version>
 	<packaging>jar</packaging>
 	<name>heanbian-jwt</name>
 	<url>https://github.com/heanbian/heanbian-jwt</url>
@@ -152,7 +152,7 @@
 	</distributionManagement>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<heanbian-crypto.version>15.0</heanbian-crypto.version>
+		<heanbian-crypto.version>16.1</heanbian-crypto.version>
 		<java-jwt.version>4.4.0</java-jwt.version>
 	</properties>
 	<dependencies>
