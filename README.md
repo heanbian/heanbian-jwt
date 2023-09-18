@@ -12,7 +12,7 @@ JDK 17
 <dependency>
   <groupId>com.heanbian</groupId>
   <artifactId>heanbian-jwt</artifactId>
-  <version>15.1</version>
+  <version>16.1</version>
 </dependency>
 ```
 
