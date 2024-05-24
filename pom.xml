@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.heanbian</groupId>
 	<artifactId>heanbian-jwt</artifactId>
-	<version>20.1</version>
+	<version>20.2</version>
 	<packaging>jar</packaging>
 	<name>heanbian-jwt</name>
 	<url>https://github.com/heanbian/heanbian-jwt</url>
@@ -123,6 +123,17 @@
 				<artifactId>maven-enforcer-plugin</artifactId>
 				<version>3.4.1</version>
 			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.13</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>sonatype-nexus-staging</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -153,7 +164,7 @@
 	</distributionManagement>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<heanbian-crypto.version>20.1</heanbian-crypto.version>
+		<heanbian-crypto.version>20.2</heanbian-crypto.version>
 		<java-jwt.version>4.4.0</java-jwt.version>
 	</properties>
 	<dependencies>
