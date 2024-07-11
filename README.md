@@ -12,7 +12,7 @@ JDK 21
 <dependency>
   <groupId>com.heanbian</groupId>
   <artifactId>heanbian-jwt</artifactId>
-  <version>20.1</version>
+  <version>20.3</version>
 </dependency>
 ```
 
