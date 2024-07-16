@@ -30,14 +30,14 @@
 			<organization>heanbian.com</organization>
 			<organizationUrl>https://heanbian.com</organizationUrl>
 			<roles>
-				<role>developer</role>
+				<role>Developer</role>
+				<role>Maintainer</role>
 			</roles>
 		</developer>
 	</developers>
 	<scm>
 		<connection>scm:git:https://github.com/heanbian/heanbian-jwt.git</connection>
-		<developerConnection>
-			scm:git:https://github.com/heanbian/heanbian-jwt.git</developerConnection>
+		<developerConnection>scm:git:https://github.com/heanbian/heanbian-jwt.git</developerConnection>
 		<url>https://github.com/heanbian/heanbian-jwt</url>
 	</scm>
 	<issueManagement>
