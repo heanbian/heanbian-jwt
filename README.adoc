@@ -20,4 +20,14 @@ JDK 21
 
 * JwtTemplate
 
+----
+JwtTemplate jwtTemplate = new JwtTemplate();
+
+Map<String, Object> claims = new HashMap<>();
+String token = jwtTemplate.createToken(claims);
+
+Map<String, Claim> data = jwtTemplate.getClaims(token);
+
+----
+
 说明：支持 ECC JWT
