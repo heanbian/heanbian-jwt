@@ -172,7 +172,6 @@
 			<groupId>com.heanbian</groupId>
 			<artifactId>heanbian-crypto</artifactId>
 			<version>${heanbian-crypto.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.auth0</groupId>
